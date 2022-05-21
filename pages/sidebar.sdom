@@ -1,0 +1,10 @@
+
+section [title](QueueIt) [char](#)
+
+    a "Presentation" [page](index)
+    a "Installation" [page](install)
+    a "Créer une queue" [page](create)
+    a "Les méthodes" [page](methods)
+    a "Queue imbriquée" [page](every)
+
+section [title](Fin) [char](#)

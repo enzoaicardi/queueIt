@@ -1,0 +1,4 @@
+h1 "Installation"
+
+p {Avant toute chose, } +a "téléchargez le fichier queueIt.js" [href](./lib/queueIt.js) [download]
+p {Ensuite il vous suffit de l'insérer dans votre code ou d'ajouter une balise} +q {<script src="./queueIt.js"></script>} -{dans votre code HTML.}

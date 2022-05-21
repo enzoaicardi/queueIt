@@ -1,0 +1,50 @@
+h1 "Queue imbriquée"
+
+p {La fonction} +q "every()" -{permet la création d'une queue imbriquée.}
+
+h2 "Quelle utilité ?"
+
+p {Une queue imbriquée permet de renvoyer une variable différente par queue, ce qui permet par exemple de boucler une action sur plusieurs éléments.}
+
+p {La fonction prend trois arguments. Le premier est un tableau contenant les différentes variables qui seront envoyées tour à tour. Le second correspond au tableau passé dans} +q "queue([...])" -{en premier argument. Le dernier (optionnel) correspond à un objet equivalent à celui passé à la méthode } +a [page](methods) "change({...})"
+
+p {La queue retournée par} +q "every()" -{possède les mêmes méthodes qu'une queue classique.}
+
+h2 "Exemple d'utilistation"
+
+code [title](Exemple) [language](js)
+{// On génère le tableau de variables (ici une NodeList)
+var items = [div, header, nav];
+
+// On crée la queue qui va s'appliquer à tout les éléments
+var array = [
+    log, ['envoie un premier message'],
+    log, ['envoie un second message']
+]);
+
+// On change({...\}) les paramètres de la queue
+var options = {
+    interval: 500,
+    onfinish: (message) => {console.log(message);\}
+\}
+
+// On crée la fonction "log"
+function log(message, next, item){
+    console.log(item.tagName + ' ' + message);
+    next();
+\}
+
+// On génère la queue imbriquée
+var q = every(items, array, options);
+// Puis on la lance
+q.play();}
+
+code [title](Résultat de la queue imbriquée) [language](js)
+{log: "div envoie un premier message"
+log: "div envoie un second message"
+
+log: "header envoie un premier message"
+log: "header envoie un second message"
+
+log: "nav envoie un premier message"
+log: "nav envoie un second message"}

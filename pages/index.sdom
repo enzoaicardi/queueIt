@@ -1,0 +1,15 @@
+h1 "QueueIt c'est quoi ?"
+
+p {QueueIt est une librairie javascript très légère, stable et hautement compatible pour créer des queues d'execution.}
+
+h2 "C'est quoi une queue d'execution"
+
+p {Une queue d'execution c'est ce qui permet d'executer des fonctions les unes après les autres dans un ordre précis et de controler le déroulement de l'execution.}
+
+ul
+    li "Fonction n°1 puis..."
+    li "Fonction n°2 puis..."
+    li "Fonction n°3"
+
+p {Cela peut s'avérer particulièrement pratique pour les animations sur les éléments du DOM mes les applications peuvent êtres multiples puisque la librairie ne s'appuie pas sur le DOM.}
+

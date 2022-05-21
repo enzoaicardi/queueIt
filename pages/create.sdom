@@ -1,0 +1,49 @@
+h1 "Créer une queue d'execution"
+
+p {Créer une queue d'execution se fait par le biais de la fonction} +q "queue([...])" -{à la manière de } +a "crimson" [href](https://crimson.aicardi.pro) -{.}
+
+code [title](Fonction Queue) [language](js)
+{var q = queue([
+    function, [...arguments]
+    // ...
+]);}
+
+p {La fonction queue peut prendre deux arguments}
+
+h3 "Parametres"
+
+p {Le premier argument, obligatoire, se présente sous la forme d'un tableau, ce tableau contient des pairs} +q "Fonction, [arguments de la fonction]" -{. Chaque fonction sera executée dans l'ordre avec les arguments spécifiés dans le tableau qui suit.}
+
+code [title](Exemple) [language](js)
+{var q = queue([
+    log, ['ceci est mon message'],
+    log, ['ceci est mon deuxième message']
+]);
+
+function log(message, next){
+    setTimeout(()=>{
+        console.log(message);
+        next();
+    \}, 1000);
+\}}
+
+p {Comme vous pouvez le constater, la fonction qui est executée dans la queue dispose d'un argument final qu'on appel} +q "next"
+{il s'agit d'une fonction qui permet de passer à la pair} +q "function, [arguments]" -{suivante. Si cette fonction n'est pas utilisée alors la queue ne pourra pas continuer.}
+
+p {Cette fonction next peut être placée partout dans votre fonction ce qui permet un très grand controle des executions. En principe on la positionnera après que toutes les actions ont été effectuées.}
+
+h3 "Variables"
+
+p {Le second argument, facultatif, se présente aussi sous la forme d'un tableau, ce dernier contient des variables qu'on voudrait faire passer à toutes les fonctions. Ces variables sont récupérables après next} +q "(next, ...variables)"
+
+code [title](Exemple) [language](js)
+{var q = queue([
+    log, ['ceci est mon message - '],
+    log, ['ceci est mon deuxième message - ']
+], ['Sunday']);
+
+function log(message, next, sufix){
+    // suffix = 'Sunday'
+    console.log(message + suffix);
+    next();
+\}}

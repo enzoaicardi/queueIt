@@ -1,0 +1,112 @@
+h1 "Les méthodes"
+
+p {Une fois créée, une queue d'execution fournit un ensemble de méthodes pour être manipulée.}
+
+h3 "play()"
+
+p {play permet de lancer la queue, cette fonction peut prendre un argument qui doit être un nombre entier et qui désigne l'index auquel commencer l'execution (le premier index étant 0).}
+
+code [title](Exemple) [language](js)
+{var q = queue([
+    log, ['ceci est mon message'],
+    log, ['ceci est mon deuxième message']
+]);
+
+function log(message, next){
+    console.log(message); next();
+\}
+
+q.play(1);
+// n'executera qu'a partir de la deuxième fonction}
+
+h3 "pause()"
+
+p {Cette fonction met en pause la queue d'execution, elle ne prend aucun argument.}
+
+h3 "jumpTo(int)"
+
+p {Cette fonction prend un argument obligatoire qui correspond au nouvel index auquel doit se rendre la queue d'execution.}
+
+code [title](Exemple) [language](js)
+{q.jumpTo(1);}
+
+h3 "reverse()"
+
+p {Cette fonction peut prendre un argument (optionnel) vallant} +q "true | false" -{, elle permet d'inverser le déroulement de la queue d'execution.}
+
+code [title](Exemple) [language](js)
+{q.reverse(); // reverse = true
+q.reverse(); // reverse = false}
+
+h3 "interval()"
+
+p {Cette fonction prend un argument (optionnel ou 0 par défaut) qui sépcifie un interval en milliseconde entre chaque execution à l'intérieur de la queue.}
+
+code [title](Exemple) [language](js)
+{q.interval(1000);}
+
+h3 "wait()"
+
+p {Cette fonction prend un argument obligatoire qui détermine si la queue doit attendre la fonction} +q "next();" -{de chaque execution, ou passe automatiquement au suivant.}
+
+code [title](Exemple) [language](js)
+{var q = queue([
+    log, ['ceci est mon message'],
+    log, ['ceci est mon deuxième message']
+]);
+
+function log(message, next){
+    setTimeout(()=>{
+        console.log(message);
+        next();
+    \}, 1000);
+\}
+
+q.wait(false); // les deux fonctions seront executée en même temps}
+
+p {Il est important de noter que} +q "wait(false)" -{n'annule pas} +q "interval(int)"
+
+h3 "variables()"
+
+p {Cette fonction prend deux arguments :}
+p {Le premier, obligatoire, est un tableau contenant les nouvelles variables (voir page } +a "Créer une queue" [page](index) -{).}
+p {Le second, optionnel, s'il vaut true, indique qu'il faut que les nouvelles variables soient ajoutées à la suite de celles déjà existentes.}
+
+code [title](Exemple) [language](js)
+{q.variables(['var-1', 'var-2', ...]);}
+
+h3 "onfinish()"
+
+p {Cette fonction prend deux arguments :}
+p {Le premier, obligatoire, est une fonction qui s'executera une fois la queue terminée.}
+p {Le second, optionnel, est un tableau contenant l'ensemble des arguments à passer à la fonction.}
+
+code [title](Exemple) [language](js)
+{q.onfinish(myfunction, [...args]);}
+
+h3 "status()..."
+
+p {Cette fonction retourne le status de la queue :}
+
+ul
+    li "index: l'index courant"
+    li "play: si la queue est en cours d'execution"
+    li "reverse: si la queue est inversée"
+    li "interval: la valeur de l'interval"
+    li "wait: la valeur de wait"
+    li "variables: le tableau des variables"
+    li "onfinish: la fonction onfinish"
+    li "args: les arguments de onfinish"
+    li "parameters: le tableau principal de la queue"
+
+h3 "change({...})"
+
+p {Cette fonction prend un argument obligatoire, c'est un objet contenant les propriétés de la queue à changer.}
+
+ul
+    li "reverse: si la queue est inversée"
+    li "interval: la valeur de l'interval"
+    li "wait: la valeur de wait"
+    li "variables: le tableau des variables"
+    li "onfinish: la fonction onfinish"
+    li "args: les arguments de onfinish"
